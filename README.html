@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عكسلي - موقع فك تشفير ملفات LIB</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #9b59b6;
+            --secondary: #3498db;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --success: #2ecc71;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #2c3e50, #4a235a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        header {
+            background: rgba(44, 62, 80, 0.9);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(155, 89, 182, 0.5);
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        nav a:hover, nav a.active {
+            background: var(--primary);
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(44, 62, 80, 0.7);
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: var(--light);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 12px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(155, 89, 182, 0.5);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .feature-card {
+            background: rgba(44, 62, 80, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(44, 62, 80, 0.95);
+        }
+        
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .upload-section {
+            background: rgba(44, 62, 80, 0.8);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 50px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .upload-section h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+        
+        .upload-area {
+            border: 3px dashed var(--secondary);
+            border-radius: 15px;
+            padding: 50px 20px;
+            margin-bottom: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(52, 152, 219, 0.1);
+        }
+        
+        .upload-area:hover {
+            background: rgba(52, 152, 219, 0.2);
+        }
+        
+        .upload-area i {
+            font-size: 4rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .upload-area p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .upload-area span {
+            color: var(--warning);
+            font-weight: bold;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .process-btn {
+            margin: 20px auto;
+            display: block;
+            width: 250px;
+        }
+        
+        .result-section {
+            background: rgba(44, 62, 80, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .result-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        .result-content {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 200px;
+            font-family: monospace;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        
+        .download-btn {
+            margin: 20px auto 0;
+            display: block;
+            width: 250px;
+        }
+        
+        .instructions {
+            margin-top: 50px;
+            background: rgba(44, 62, 80, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .instructions h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        
+        .step-number {
+            background: var(--primary);
+            color: var(--dark);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        .supported-files {
+            margin-top: 50px;
+            background: rgba(44, 62, 80, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .supported-files h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .file-card {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .file-card:hover {
+            transform: translateY(-5px);
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .file-card i {
+            font-size: 2rem;
+            color: var(--success);
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            background: rgba(44, 62, 80, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        .status {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .logo-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero {
+                padding: 40px 15px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .upload-section {
+                padding: 25px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo">
+                <i class="fas fa-unlock-alt"></i>
+                <h1>عكسلي - موقع فك تشفير ملفات LIB</h1>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">الرئيسية</a></li>
+                <li><a href="#">المميزات</a></li>
+                <li><a href="#">الدليل</a></li>
+                <li><a href="#">الملفات المدعومة</a></li>
+                <li><a href="#">اتصل بنا</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <section class="hero">
+            <h2>فك تشفير ملفات LIB بكل سهولة</h2>
+            <p>عكسلي هو المنصة الأولى للهندسة العكسية لملفات LIB و SO. استخرج الرموز البرمجية وفك تشفير الملفات في ثوانٍ معدودة باستخدام أحدث الأدوات المخصصة للمطورين.</p>
+            <a href="#upload" class="btn">ابدأ فك التشفير الآن</a>
+        </section>
+        
+        <section class="features">
+            <div class="feature-card">
+                <i class="fas fa-microchip"></i>
+                <h3>هندسة عكسية متقدمة</h3>
+                <p>تقنيات متطورة لفك تشفير حتى أصعب ملفات LIB باستخدام خوارزميات متقدمة</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-code"></i>
+                <h3>استخراج الشيفرات المصدرية</h3>
+                <p>استخراج الشيفرات البرمجية بلغة C++ و Assembly مع تحليل البنية البرمجية</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>حماية وأمان</h3>
+                <p>جميع عمليات الفك تتم بشكل آمن دون الاحتفاظ بنسخ من ملفاتك أو مشاركتها</p>
+            </div>
+        </section>
+        
+        <section id="upload" class="upload-section">
+            <h2>قم بتحميل ملف LIB أو SO</h2>
+            
+            <div class="upload-area" id="dropArea">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>اسحب ملف LIB/SO وأفلته هنا أو</p>
+                <p><span>انقر لاختيار الملف</span></p>
+                <p>الحد الأقصى لحجم الملف: 100MB</p>
+                <p>(يدعم جميع أنواع ملفات المكتبات الديناميكية والستاتيكية)</p>
+            </div>
+            
+            <input type="file" id="fileInput" class="file-input" accept=".so,.lib,.dll,.a">
+            
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+            <div class="status" id="statusText">في انتظار تحميل الملف...</div>
+            
+            <button class="btn process-btn" id="processBtn">بدء عملية فك التشفير</button>
+        </section>
+        
+        <section class="result-section">
+            <h2>نتيجة فك التشفير</h2>
+            <div class="result-content" id="resultContent">
+                // ستظهر هنا محتويات الملف بعد فك التشفير
+                // يمكنك رؤية الشيفرات البرمجية والرموز
+                // انتظر اكتمال العملية...
+            </div>
+            <button class="btn download-btn btn-secondary" id="downloadBtn" disabled>
+                <i class="fas fa-download"></i> تحميل الشيفرة المصدرية
+            </button>
+        </section>
+        
+        <section class="supported-files">
+            <h2>الملفات المدعومة</h2>
+            <div class="file-grid">
+                <div class="file-card">
+                    <i class="fab fa-android"></i>
+                    <h3>Android .so</h3>
+                    <p>ملفات المكتبات المشتركة لنظام أندرويد</p>
+                </div>
+                
+                <div class="file-card">
+                    <i class="fab fa-windows"></i>
+                    <h3>Windows .dll</h3>
+                    <p>ملفات المكتبات الديناميكية لنظام ويندوز</p>
+                </div>
+                
+                <div class="file-card">
+                    <i class="fab fa-linux"></i>
+                    <h3>Linux .so</h3>
+                    <p>ملفات المكتبات المشتركة لنظام لينكس</p>
+                </div>
+                
+                <div class="file-card">
+                    <i class="fas fa-archive"></i>
+                    <h3>Static Libraries</h3>
+                    <p>ملفات المكتبات الثابتة (.a, .lib)</p>
+                </div>
+                
+                <div class="file-card">
+                    <i class="fas fa-gamepad"></i>
+                    <h3>Game Libraries</h3>
+                    <p>ملفات الألعاب مثل PUBG, Free Fire, وغيرها</p>
+                </div>
+                
+                <div class="file-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Anti-Cheat Modules</h3>
+                    <p>وحدات مكافحة الغش في الألعاب</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="instructions">
+            <h2>كيفية استخدام عكسلي</h2>
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>تحميل الملف</h3>
+                    <p>قم بتحديد ملف LIB أو SO من جهازك. يمكنك سحبه وأفلاته في المنطقة المخصصة أو النقر لاختيار الملف.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>بدء عملية الفك</h3>
+                    <p>انقر على زر "بدء عملية فك التشفير" لبدء تحليل الملف وفك تشفير الشيفرة البرمجية.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>تحليل النتائج</h3>
+                    <p>بعد اكتمال العملية، ستظهر الشيفرة البرمجية المفكوكة في منطقة النتائج. يمكنك تصفحها وتحليلها.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>تحميل النتائج</h3>
+                    <p>قم بتنزيل الشيفرة المصدرية كملف نصي لاستخدامها في مشاريعك أو لتحليل أعمق باستخدام أدوات أخرى.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <h3>عكسلي - منصة الهندسة العكسية</h3>
+            <p>أول منصة عربية متخصصة في فك تشفير ملفات LIB و SO للمطورين والباحثين</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            
+            <p>© 2023 عكسلي. جميع الحقوق محفوظة.</p>
+            <p>هذا الموقع لأغراض تعليمية وبحثية فقط. لا نتحمل مسؤولية أي استخدام غير قانوني.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropArea = document.getElementById('dropArea');
+            const fileInput = document.getElementById('fileInput');
+            const processBtn = document.getElementById('processBtn');
+            const resultContent = document.getElementById('resultContent');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const progressBar = document.getElementById('progressBar');
+            const statusText = document.getElementById('statusText');
+            
+            // Handle drag and drop events
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropArea.addEventListener(eventName, highlight, false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, unhighlight, false);
+            });
+            
+            function highlight() {
+                dropArea.style.borderColor = '#9b59b6';
+                dropArea.style.backgroundColor = 'rgba(155, 89, 182, 0.2)';
+            }
+            
+            function unhighlight() {
+                dropArea.style.borderColor = '#3498db';
+                dropArea.style.backgroundColor = 'rgba(52, 152, 219, 0.1)';
+            }
+            
+            // Handle file drop
+            dropArea.addEventListener('drop', handleDrop, false);
+            
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                if (files.length) {
+                    handleFiles(files[0]);
+                }
+            }
+            
+            // Handle file selection via click
+            dropArea.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            fileInput.addEventListener('change', function() {
+                if (this.files.length) {
+                    handleFiles(this.files[0]);
+                }
+            });
+            
+            function handleFiles(file) {
+                // Check file type
+                const validExtensions = ['.so', '.lib', '.dll', '.a'];
+                const fileExt = '.' + file.name.split('.').pop().toLowerCase();
+                
+                if (!validExtensions.includes(fileExt)) {
+                    statusText.textContent = 'نوع الملف غير مدعوم. الرجاء تحميل ملف LIB, SO, DLL, أو A.';
+                    statusText.style.color = '#e74c3c';
+                    return;
+                }
+                
+                // Check file size (100MB max)
+                if (file.size > 100 * 1024 * 1024) {
+                    statusText.textContent = 'حجم الملف كبير جدًا. الحد الأقصى 100MB.';
+                    statusText.style.color = '#e74c3c';
+                    return;
+                }
+                
+                statusText.textContent = `تم تحميل الملف: ${file.name}`;
+                statusText.style.color = '#9b59b6';
+                
+                // Simulate decryption process
+                processBtn.addEventListener('click', function() {
+                    // Simulate progress
+                    let progress = 0;
+                    const interval = setInterval(() => {
+                        progress += Math.random() * 10;
+                        if (progress >= 100) {
+                            progress = 100;
+                            clearInterval(interval);
+                            
+                            // Show result
+                            statusText.textContent = 'تم فك التشفير بنجاح!';
+                            statusText.style.color = '#2ecc71';
+                            
+                            // Enable download button
+                            downloadBtn.disabled = false;
+                            
+                            // Show decrypted content
+                            resultContent.textContent = generateDecryptedContent();
+                        }
+                        progressBar.style.width = `${progress}%`;
+                    }, 200);
+                });
+            }
+            
+            // Generate sample decrypted content
+            function generateDecryptedContent() {
+                const functions = [
+                    'DecryptData()', 'VerifyChecksum()', 'AntiCheatInit()', 'MemoryScan()', 
+                    'HookDetection()', 'ProcessCheck()', 'DebuggerDetect()', 'EmulatorCheck()',
+                    'RootDetection()', 'VirtualMachineCheck()', 'IntegrityCheck()', 'SignatureScan()',
+                    'CodeObfuscation()', 'BehaviorAnalysis()', 'APIHookDetect()',
+                    'InitEncryption()', 'LoadLibrary()', 'DecryptString()', 'GetFunctionAddress()'
+                ];
+                
+                let content = '// ملف مفكوك التشفير بواسطة عكسلي\n\n';
+                content += `// اسم الملف: ${fileInput.files[0]?.name || 'unknown'}\n`;
+                content += `// حجم الملف: ${formatFileSize(fileInput.files[0]?.size || 0)}\n`;
+                content += `// نوع الملف: ELF 64-bit LSB shared object\n\n`;
+                
+                // Generate random functions
+                for (let i = 0; i < 15; i++) {
+                    const func = functions[Math.floor(Math.random() * functions.length)];
+                    content += `void ${func} {\n`;
+                    
+                    // Add some assembly-like code
+                    const instructions = ['MOV', 'PUSH', 'POP', 'CMP', 'JMP', 'CALL', 'RET', 'LEA', 'TEST', 'NOP', 'XOR', 'ADD', 'SUB', 'MUL', 'DIV'];
+                    for (let j = 0; j < 7; j++) {
+                        const instr = instructions[Math.floor(Math.random() * instructions.length)];
+                        content += `    ${instr} ${getRandomRegister()}, ${getRandomOperand()}\n`;
+                    }
+                    
+                    content += '}\n\n';
+                }
+                
+                // Add some strings
+                content += '\n// السلاسل النصية المستخرجة:\n';
+                const strings = [
+                    'AntiCheat initialized',
+                    'Memory scan started',
+                    'Debugger detected!',
+                    'Emulator environment found',
+                    'Root access detected',
+                    'Virtual machine identified',
+                    'Code integrity violation',
+                    'Signature verification failed',
+                    'Hook detected in function'
+                ];
+                
+                for (let i = 0; i < 5; i++) {
+                    const str = strings[Math.floor(Math.random() * strings.length)];
+                    content += `// "${str}"\n`;
+                }
+                
+                return content;
+            }
+            
+            function formatFileSize(bytes) {
+                if (bytes < 1024) return bytes + ' B';
+                else if (bytes < 1048576) return (bytes / 1024).toFixed(2) + ' KB';
+                else return (bytes / 1048576).toFixed(2) + ' MB';
+            }
+            
+            function getRandomRegister() {
+                const registers = ['EAX', 'EBX', 'ECX', 'EDX', 'ESI', 'EDI', 'EBP', 'ESP', 'R8', 'R9', 'R10', 'R11', 'R12', 'R13', 'R14', 'R15'];
+                return registers[Math.floor(Math.random() * registers.length)];
+            }
+            
+            function getRandomOperand() {
+                const operands = ['0x0', '0x1', '0x2', '0x4', '0x8', '0x10', '[EBX]', '[ECX+0x4]', 'DWORD PTR [EAX]', 'OFFSET 0x45AB12', 'QWORD PTR [RBP-0x10]', 'R12', '0xDEADBEEF', '0xCAFEBABE'];
+                return operands[Math.floor(Math.random() * operands.length)];
+            }
+            
+            // Download button functionality
+            downloadBtn.addEventListener('click', function() {
+                const content = resultContent.textContent;
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'decrypted_code.txt';
+                document.body.appendChild(a);
+                a.click();
+                
+                // Clean up
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
